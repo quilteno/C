@@ -1,7 +1,7 @@
 {
     "tasks": [
         {
-            "label": "C/C++: g++.exe build active file",
+            "label": "C/C++: g++ build active file",
             "presentation": {
                 "echo": true,
                 "reveal": "always",
@@ -11,15 +11,15 @@
                 "clear": false,
             },
             "type": "cppbuild",
-            "command": "D:\\MinGW\\bin\\g++.exe",
+            "command": "\\usr\\bin\\g++.exe",
             "args": [
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "D:\\MinGW\\bin"
+                "cwd": "\\usr\\bin"
             },
             "problemMatcher": [
                 "$gcc"
