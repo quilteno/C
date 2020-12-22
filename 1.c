@@ -7,7 +7,6 @@ int main()
     int a = 4;      
     a++;
     f(&a);
-    a--;
     return 0;
 }
 
