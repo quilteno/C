@@ -5,17 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "g++ - 生成和调试活动文件",
+            "name": "debug(gdb)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}",
+            "program": "/tmp/buildtempc",//将产生的可执行文件放入缓存文件夹
             "args": [],
             "stopAtEntry": false,
-            "cwd": "\\usr\\bin",
+            "cwd": "${workspaceFolder}/Resources",//定位到资源目录
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "\\usr\\bin\\gdb",
+            //"miDebuggerPath": "${fileDirname}",
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",
@@ -23,8 +23,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: g++ build active file",
-            
+            "preLaunchTask": "build(gcc)",
         },
     ]
 }
