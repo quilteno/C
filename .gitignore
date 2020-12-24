@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 /*
 !Sources
 tempCodeRunnerFile.c
 !.gitignore
+=======
+.vscode
+*.exe
+tempCodeRunnerFile.c
+>>>>>>> 72d2d51a90740cc6784e8a7e937e1d2125bb2175
