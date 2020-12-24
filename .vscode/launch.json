@@ -13,9 +13,8 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/Resources",//定位到资源目录
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": false,
             "MIMode": "gdb",
-            //"miDebuggerPath": "${fileDirname}",
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",
@@ -24,6 +23,7 @@
                 }
             ],
             "preLaunchTask": "build(gcc)",
+            "miDebuggerPath": "/usr/bin/gdb",
         },
     ]
 }
