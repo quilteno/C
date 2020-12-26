@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 /*
 !Headers
 !*.c
 !.gitignore
+=======
+.vscode
+*.exe
+>>>>>>> cc416d336f37ed3715ecc798b2236be0f7d46d21
