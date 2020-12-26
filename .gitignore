@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-.vscode
-=======
 .vscode
 Resources
 Sources/*
 !Sources/*.c
-<<<<<<< HEAD
->>>>>>> 8700d26726d6e95bc3c6120ba046b06fc1fa95ca
-=======
->>>>>>> 31cdc7eb262a9413f759b8f94a83304a8c5a4f35
