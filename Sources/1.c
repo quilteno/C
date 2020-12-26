@@ -1,3 +1,4 @@
+#include <stdio.h>
 //头文件
 
 int main(int argc,const char **argv){
