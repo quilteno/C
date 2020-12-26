@@ -1,4 +1,4 @@
-/*
-!Headers
-!*.c
-!.gitignore
+.vscode
+Resources
+Sources/*
+!Sources/*.c
