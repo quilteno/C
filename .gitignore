@@ -2,3 +2,4 @@
 Resources
 Sources/*
 !Sources/*.c
+Sources/tempCodeRunnerFile.c

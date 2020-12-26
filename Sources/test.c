@@ -1,22 +1,26 @@
 #include <stdio.h>
-#include <string.h>
+#include <bubble.h>
 //头文件
-
-int mian(int argc, const char **argv)
+int main(int argc, const char **argv)
 {
-    char c[4][10] = {
-        "贾荣凯\0",
-        "兰一凡\0",
-        "毛小松\0",
-        "李俊伟\0"};
-
-    for (int i = 0; i < 4; i++)
+    // int *number;
+    int n;
+    printf("type how much numbers\n");
+    scanf("%d", &n);
+    int a[n];
+    char c[n+1];
+    scanf("%s", c);
+    for (int i = 0; i < n; i++)
     {
-        if (strcmp("毛小松", c[i]))
-        {
-            printf("Found\n");
-            return 0;
-        }
+        a[i] = (int)c[i]-48;
     }
-    return 1;
+    
+    // number = &a[0];
+    bubble(&a[0], n);
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d", a[i]);
+    }
+
+    return 0;
 } //主函数
