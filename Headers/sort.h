@@ -12,7 +12,7 @@ int bubble(int *bubble_a, int bubble_n)
     int flag = 0;
     for (int i = 0; i < bubble_n; i++)
     {
-        for (int j = 0; j < bubble_n - i; j++)
+        for (int j = 0; j < bubble_n - i - 1; j++)
         {
             if (*(bubble_a + j) > *(bubble_a + j + 1))
             {
