@@ -1,13 +1,16 @@
 #ifndef _SORT_H_
 #define _SORT_H_
+#define ArrLen 100000
 //#ifndef后面写头文件名的大写。例如test.h，——>_TEST_H_
 /*排序头文件，提供多种数组排序*/
 void swap(int *swap_a, int *swap_b);
-int bubble(int *bubble_a, int n);
-void choice(int *choice_a, int n);
+int bubbleSort(int *bubble_a, int n);
+void choiceSort(int *choice_a, int n);
+void merge(int arr[], int start, int mid, int end);
+void mergeSort(int arr[], int start, int end);
 
 //冒泡排序
-int bubble(int *bubble_a, int bubble_n)
+int bubbleSort(int *bubble_a, int bubble_n)
 {
     int flag = 0;
     for (int i = 0; i < bubble_n; i++)
@@ -37,7 +40,7 @@ void swap(int *swap_a, int *swap_b)
 }
 
 //选择排序法
-void choice(int *choice_a, int choice_n)
+void choiceSort(int *choice_a, int choice_n)
 {
     int temp = 0;
     int c;
@@ -60,6 +63,48 @@ void choice(int *choice_a, int choice_n)
             *(choice_a + i) = temp;
         }
     }
+}
+//归并排序法
+void merge(int arr[], int start, int mid, int end)
+{
+    int result[ArrLen];
+    int k = 0;
+    int i = start;
+    int j = mid + 1;
+    while (i <= mid && j <= end)
+    {
+        if (arr[i] < arr[j])
+        {
+            result[k++] = arr[i++];
+        }
+        else
+        {
+            result[k++] = arr[j++];
+        }
+    }
+    if (i == mid + 1)
+    {
+        while (j <= end)
+            result[k++] = arr[j++];
+    }
+    if (j == end + 1)
+    {
+        while (i <= mid)
+            result[k++] = arr[i++];
+    }
+    for (j = 0, i = start; j < k; i++, j++)
+    {
+        arr[i] = result[j];
+    }
+}
+void mergeSort(int arr[], int start, int end)
+{
+    if (start >= end)
+        return;
+    int mid = (start + end) / 2;
+    mergeSort(arr, start, mid);
+    mergeSort(arr, mid + 1, end);
+    merge(arr, start, mid, end);
 }
 
 #endif
