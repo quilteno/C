@@ -3,8 +3,11 @@
 
 int main(int argc,const char **argv)
 {
-    int i=0;
-    printf("%d\n",1+i++);
-    printf("%d\n",i);
+    int a = 48;
+    int b = 220;
+    int c = 221;
+    printf("%c%c\n",0xa8, 0x80);
+    printf("%c\n",b);
+    printf("%c\n",c);
     return 0;
 }
