@@ -1,127 +1,118 @@
 #include <iostream>
 #include <stdlib.h>
-#define maxSize 5
+#define maxSize 6
 using namespace std;
-typedef struct LNode //单链表结点
+typedef struct LNode //
 {
-    int date;
-    struct LNode *next; //指向后继结点指针
+    int data;
+    struct LNode *next; //
 } LNode;
+typedef struct DLNode
+{
+    int data;
+    struct DLNode *prior;
+    struct DLNode *next;
+} DLNode;
 
-void creatlistR(LNode *&C, int a[], int n); //尾插�?
-void creatlistF(LNode *&C, int a[], int n); //头插�?
-void merge(LNode *A, LNode *B, LNode *&C);  //归并
-void display(LNode *C, int length);         //打印单链表
-void reverse(LNode)
+void creatlistR(LNode *&C, int a[], int n);   //尾插法
+void creatlistF(LNode *&C, int a[], int n);   //头插法
+void creatDlistR(DLNode *&C, int a[], int n); //双链表尾插法
+void display(LNode *C, int length);           //打印链表
+void mergeF(LNode *A, LNode *B, LNode *C);    //头插法归并
 
 int main(int argc, const char **argv)
 {
-    int number[maxSize] = {1,3,5,7,9};
-    int number2[maxSize] = {0,2,4,6,8};
-    for (int i = 0; i < maxSize; i++) //设置一�?0�?100的数�?
-    {
-        // number[i] = (rand() % maxSize);
-        // number[i] = (i+5)%10;
-    }
-    LNode *L1;
-    LNode *L2;
-    LNode *L3;
-    creatlistR(L1, number, maxSize);
-    creatlistR(L2, number2, maxSize);
-    display(L1, maxSize); //打印链表
-    display(L2, maxSize); //打印链表
-    merge(L1, L2, L3);
-    display(L3, 2*maxSize); //打印链表
-
-    system("pause"); //运完完成后保持窗口
+    LNode *L;
+    int a[maxSize] = {2, 4, 5, 7, 9, 0};
+    creatlistF(LNode * L, int a[], int maxSize);
+    
+    system("pause");
     return 0;
 }
-
+void display(LNode *C, int length)
+{
+    LNode *r;
+    r = C->next;
+    for (int i = 0; i < length; i++)
+    {
+        printf("%4d ", r->data);
+        r = r->next;
+    }
+    printf("\n");
+}
 void creatlistR(LNode *&C, int a[], int n) //尾插法
 {
-    LNode *s, *r; //s指向新的结点,r指向终结点
-    C = (LNode *)malloc(sizeof(LNode));
+    LNode *s, *r;                       //s指向新申请的结点,r指向C的终端结点
+    C = (LNode *)malloc(sizeof(LNode)); //申请C的头结点空间
     C->next = NULL;
-    r = C;
-    for (int i = 0; i < n; i++) //接受结点的值
+    r = C; //
+    for (int i = 0; i < n; i++)
     {
-        s = (LNode *)malloc(sizeof(LNode)); //开辟内存空间
-        s->date = a[i];
-        r->next = s; //r来接纳新结点
-        r = r->next; //r指向终结点
+        s = (LNode *)malloc(sizeof(LNode));
+        s->data = a[i]; //接纳a中元素
+        r->next = s;    //r接纳新结点
+        r = r->next;    //r指向终端结点,以便接纳下一个
     }
-    r->next = NULL; //针域为NULL
+    r->next = NULL; //C终端结点指针域置为NULL
 }
-
 void creatlistF(LNode *&C, int a[], int n) //头插法
 {
     LNode *s;
-    C = (LNode *)malloc(sizeof(LNode *));
+    C = (LNode *)malloc(sizeof(LNode));
     C->next = NULL;
     for (int i = 0; i < n; i++)
     {
         s = (LNode *)malloc(sizeof(LNode));
-        s->date = a[i];
-        /*下面两个关键步*/
-        s->next = C->next; //s所指新结点指针域指向C开始结
-        C->next = s;       //头结点的指针域指向s结点,使s称为新结�?
+        s->data = a[i];
+        /*头插法关键步骤*/
+        s->next = C->next; //s的指针域指向C的开始结点
+        C->next = s;       //头结点的指针指向s结点,s成为了新的开始结点
     }
 }
-
-void display(LNode *C, int length) //打印链表
+void mergeR(LNode *A, LNode *B, LNode *C) //尾插法归并,C递增
 {
-    LNode *r;
-    r = C->next; //定位指针
-    for (int i = 0; i < length; i++)
-    {
-        if (i % 10 == 0 && i != 0)
-        {
-            printf("\n");
-        }
-        printf("%02d ", r->date);
-        r = r->next; //打印后进入下一结点
-    }
-    printf("\n");
-}
-
-void merge(LNode *A, LNode *B, LNode *&C) //采用头插法归并,为递减序列
-{
-    LNode *p = A->next;
-    LNode *q = B->next;
-    LNode *s;
+    LNode *p = A->next; //p跟踪A的最小值
+    LNode *q = B->next; //q跟踪B的最小值
+    LNode *r;           //r始终指向终端结点
     C = A;
     C->next = NULL;
-    //free(B);
+    free(B);
+    r = C;
     while (p != NULL && q != NULL)
     {
-        if (p->date <= q->date)
+        if (p->data <= q->data) //如果p的数据域较小,则将p插入尾部
         {
-            s = p;
-            p = p->next;
-            s->next = C->next;
-            C->next = s;
+            r->next = p; //此时实际操作为将p所指结点接到C后面,r为指向C的指针
+            p = p->next; //p后移
+            r = r->next; //r后移
         }
         else
         {
-            s = q;
-            q = q->next;
-            s->next = C->next;
-            C->next = s;
+            r->next = q; //此时实际操作为将q所指结点接到C后面,r为指向C的指针
+            q = q->next; //q后移
+            r = r->next; //r后移
         }
     }
-    /*插完一列表后,还得将另一用头插法逐个插入C的头结点*/
-    while (p != NULL)
+    r->next = NULL;
+    if (p != NULL)
+        r->next = p; //此时实际操作为,r=C=A所指的那一块内存的指针域指向p所指的结点
+    if (q != NULL)
+        r->next = q; //同上
+}
+void creatDlistR(DLNode *&L, int a[], int n) //双链表尾插法
+{
+    DLNode *s, *r;
+    L = (DLNode *)malloc(sizeof(DLNode));
+    L->prior = NULL;
+    L->next = NULL;
+    r = L; //r指向终端结点
+    for (int i = 0; i < n; i++)
     {
-        s = p;
-        p = p->next;
-        s->next = C->next;
-        C->next = s;
+        s = (DLNode *)malloc(sizeof(DLNode));
+        s->data = a[i];
+        r->next = s;
+        s->prior = r;
+        r = s;
     }
-    while (q != NULL)
-    {
-        s = q;
-        q = q->next;
-        s->next = C->next;
-        C->next = s;
-    }
+    r->next = NULL;
 }
