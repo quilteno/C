@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-#define maxSize 6
+#define maxSize 8
 using namespace std;
 typedef struct LNode //
 {
@@ -14,21 +14,24 @@ typedef struct DLNode
     struct DLNode *next;
 } DLNode;
 
-void creatlistR(LNode *&C, int a[], int n);   //尾插法
-void creatlistF(LNode *&C, int a[], int n);   //头插法
-void creatDlistR(DLNode *&C, int a[], int n); //双链表尾插法
-void display(LNode *C, int length);           //打印链表
-void mergeF(LNode *A, LNode *B, LNode *C);    //头插法归并
-int serch(LNode *A, int k);//查找倒数第k个指针
+void creatlistR(LNode *&C, int a[], int n);        //尾插法
+void creatlistF(LNode *&C, int a[], int n);        //头插法
+void creatDlistR(DLNode *&C, int a[], int n);      //双链表尾插法
+void display(LNode *C, int length);                //打印链表
+void mergeF(LNode *A, LNode *B, LNode *C);         //头插法归并
+int serchK(LNode *A, int K);                       //查找倒数第k个结点
+void moveP(int a[], int n, int P);                 //左移P个位置
+void reverse(int a[], int left, int right, int k); //逆置指定数组
 
 int main(int argc, const char **argv)
 {
-    LNode *L;
-    int a[maxSize] = {2, 4, 5, 7, 9, 0};
-    creatlistF(LNode * L, int a[], int maxSize);
-
-    system("pause");
-    return 0;
+    int a[maxSize] = {1, 2, 3, 4, 5, 6, 7, 8};
+    moveP(a, 8, 3);
+    for (int i = 0; i < maxSize;i++)
+    {
+        printf("%d\n", a[i]);
+    }
+        return 0;
 }
 void display(LNode *C, int length)
 {
@@ -100,7 +103,6 @@ void mergeR(LNode *A, LNode *B, LNode *C) //尾插法归并,C递增
     if (q != NULL)
         r->next = q; //同上
 }
-
 void creatDlistR(DLNode *&L, int a[], int n) //双链表尾插法
 {
     DLNode *s, *r;
@@ -118,7 +120,41 @@ void creatDlistR(DLNode *&L, int a[], int n) //双链表尾插法
     }
     r->next = NULL;
 }
-
-
-
-
+int serchK(LNode *A, int k) //查找倒数第k个指针
+{
+    if (A == NULL || k == 0)
+    {
+        return 0;
+    }
+    LNode *r1 = A;
+    LNode *r2 = A;
+    for (int i = 0; i < k; i++)
+    {
+        if (r1)
+            r1 = r1->next;
+        else
+            return 0;
+    }
+    while (r1)
+    {
+        r1 = r1->next;
+        r2 = r2->next;
+    }
+    return r2->data;
+}
+void reverse(int a[], int left, int right, int k)
+{
+    int temp;
+    for (int i = left, j = right; i < left + k && i < j; i++, j++)
+    {
+        temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+}
+void moveP(int a[], int n, int P)
+{
+    reverse(a, 0, P - 1, P);
+    reverse(a, P, n - 1, n - P);
+    reverse(a, 0, n - 1, n);
+}
